@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okinawa 5D4N VIBE Trip Planner</title>
+    <!-- VIBE APP Style - 模仿深色模式、圓角與清晰層次 -->
+    <style>
+        body { 
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #1a1a2e; 
+            color: #e0e0f8; 
+            padding: 20px; 
+            line-height: 1.6;
+        }
+        .app-container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            background-color: #2c2c54; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); 
+            padding: 30px; 
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        .header h1 { 
+            color: #84cc16; /* 綠色高亮 */
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            margin-bottom: 5px;
+        }
+        .trip-card { 
+            background-color: #3b3b64; 
+            border-radius: 15px; 
+            padding: 20px; 
+            margin-bottom: 25px; 
+            transition: transform 0.2s, box-shadow 0.2s; 
+            cursor: pointer; 
+        }
+        .trip-card:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
+        }
+        .day-title { 
+            font-size: 1.4em; 
+            color: #ffeb3b; /* 黃色高亮 */
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+            font-weight: bold;
+        }
+        .icon { 
+            font-size: 1.2em; 
+            margin-right: 12px; 
+        }
+        .details { 
+            margin-top: 20px; 
+            border-left: 4px solid #60a5fa; /* 藍色分隔線 */
+            padding-left: 20px; 
+            display: none; 
+            background-color: #34345a; /* 略深背景 */
+            padding-top: 10px;
+            border-radius: 0 0 10px 10px;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-bottom: 10px;
+        }
+        .details p { 
+            margin: 8px 0; 
+            padding-left: 20px;
+            font-size: 0.95em;
+        }
+        .weather-box { 
+            background-color: #4c4c7c; 
+            padding: 10px 15px; 
+            border-radius: 10px; 
+            margin-top: 10px; 
+            font-size: 0.9em; 
+            border: 1px solid #60a5fa30;
+        }
+        .highlight { 
+            color: #84cc16; /* 綠色高亮 */
+            font-weight: bold; 
+        }
+        .time-slot {
+            color: #ffeb3b; /* 黃色高亮時間 */
+            font-weight: 600;
+            width: 70px; /* 固定時間寬度 */
+            display: inline-block;
+        }
+        .info-label { 
+            color: #a0a0c0; 
+            font-size: 0.85em;
+        }
+        .detail-tip {
+            background-color: #4c4c7c;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            color: #e0e0f8;
+        }
+        /* RWD 調整 */
+        @media (max-width: 600px) {
+            .app-container {
+                padding: 15px;
+            }
+            .day-title {
+                font-size: 1.2em;
+            }
+            .details p {
+                padding-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <h1>🌴 沖繩 5 天 4 夜精緻之旅</h1>
+        <p class="info-label">出發日期：2026/02/07 (預計) | 主題：精華、海岸、美食</p>
+        <div class="weather-box">
+            <span class="info-label">二月沖繩氣候概況:</span> 
+            <span class="highlight">平均溫度約 $17^{\circ}\text{C}$ - $20^{\circ}\text{C}$。體感較涼且海風大，建議攜帶防風外套與薄長袖。</span>
+        </div>
+    </div>
+
+    <!-- 行程卡片將在此處載入 -->
+    <div id="trip-list"></div>
+
+</div>
+
+<script>
+    // 2. 行程資料 (JSON 格式，包含詳細資訊)
+    const tripData = [
+        {
+            day: 1,
+            title: "那霸初體驗：國際通美食與購物 (南沖繩)",
+            date: "2/7",
+            icon: "✈️",
+            weatherInfo: "即時天氣預報：[API Call for 2/7/2026]",
+            activities: [
+                { time: "11:00", item: "抵達那霸機場 (OKA) / 辦理租車手續 (1.5 hr)" },
+                { time: "12:30", item: "午餐：品嚐**通堂拉麵**或**暖暮拉麵** (濃郁沖繩麵)" },
+                { time: "14:00", item: "波上宮與波之上海灘 (臨海神社祈福與拍照，1 hr)" },
+                { time: "15:30", item: "新都心商圈/DFS (採購日用品或免稅精品，2 hr)" },
+                { time: "17:30", item: "入住國際通周邊飯店 / 休息 (1 hr)" },
+                { time: "18:30", item: "國際通晚餐與散步 (美食：**石垣牛/阿古豬燒肉**，3 hr)" },
+                { time: "21:30", item: "榮町市場夜生活 (體驗當地居酒屋文化，選擇性)" }
+            ],
+            tip: "建議選擇單軌站附近的飯店，方便晚上逛國際通。國際通是購買伴手禮的首選！"
+        },
+        {
+            day: 2,
+            title: "琉球王國與南部文化巡禮 (南沖繩)",
+            date: "2/8",
+            icon: "🏰",
+            weatherInfo: "即時天氣預報：[API Call for 2/8/2026]",
+            activities: [
+                { time: "09:00", item: "首里城公園 (**守禮門**、**歡會門**等外圍建築群，2 hr)" },
+                { time: "11:30", item: "玉泉洞與沖繩世界文化王國 (參觀壯觀**鐘乳石洞**，3 hr)" },
+                { time: "15:00", item: "知念岬公園 (俯瞰太平洋與久高島的絕佳海景，1 hr)" },
+                { time: "16:30", item: "驅車前往中部海岸飯店 (恩納村或北谷町，1 hr)" },
+                { time: "18:00", item: "Check-in 恩納村飯店 / 休息" },
+                { time: "19:00", item: "晚餐：品嚐正宗**琉球料理** (推薦**三線之花**，2 hr)" }
+            ],
+            tip: "玉泉洞內部濕滑且較陰暗，請穿著舒適的防滑鞋。南部景點較分散，自駕較方便。"
+        },
+        {
+            day: 3,
+            title: "中部海岸線、海景與美國村 VIBE (中部沖繩)",
+            date: "2/9",
+            icon: "🎡",
+            weatherInfo: "即時天氣預報：[API Call for 2/9/2026]",
+            activities: [
+                { time: "09:00", item: "殘波岬 (白色燈塔和壯觀的珊瑚礁斷崖，1 hr)" },
+                { time: "10:30", item: "萬座毛 (形似大象鼻子的海蝕崖，1 hr)" },
+                { time: "12:00", item: "午餐：穿越**海中道路**，在**海之站 Ayahabiru** 用餐 (1.5 hr)" },
+                { time: "14:30", item: "美國村 (Mihama American Village) 逛街購物與拍照 (3 hr)" },
+                { time: "17:30", item: "日落海灘 (Sunset Beach) 欣賞日落 (1 hr)" },
+                { time: "19:00", item: "晚餐：美國村附近牛排或異國料理 (受美軍基地影響，牛排很受歡迎)" }
+            ],
+            tip: "海邊風勢強勁，務必戴上帽子和保暖外套。美國村的摩天輪是拍照熱點。"
+        },
+        {
+            day: 4,
+            title: "北部：黑潮之海與古宇利島 (北沖繩)",
+            date: "2/10",
+            icon: "🐋",
+            weatherInfo: "即時天氣預報：[API Call for 2/10/2026]",
+            activities: [
+                { time: "08:00", item: "從中部飯店出發，驅車前往北部本部町 (1.5 hr)" },
+                { time: "10:00", item: "沖繩美麗海水族館 (Churaumi Aquarium) - 必看**「黑潮之海」** (3 hr)" },
+                { time: "13:00", item: "海洋博公園 (**海豚表演「Okichan劇場」**，免費且必看，1.5 hr)" },
+                { time: "15:00", item: "古宇利島與跨海大橋 (欣賞海景與**心形岩**，2 hr)" },
+                { time: "17:30", item: "返回那霸市區飯店 (Check-in，2 hr)" },
+                { time: "20:00", item: "晚餐：那霸**壺屋通**或**國際通**周邊巷弄美食" }
+            ],
+            tip: "建議一開館就進入水族館，避開人潮，並務必確認海豚表演時間表。"
+        },
+        {
+            day: 5,
+            title: "最終採購與歸途 (南沖繩)",
+            date: "2/11",
+            icon: "🛍️",
+            weatherInfo: "即時天氣預報：[API Call for 2/11/2026]",
+            activities: [
+                { time: "09:00", item: "AEON Mall Rycom 或 ASHIBINAA Outlet Mall (最終大採購，2 hr)" },
+                { time: "11:30", item: "午餐：在購物中心內或品嚐沖繩特色速食 **A&W** (1 hr)" },
+                { time: "13:00", item: "加油與租車公司還車 (請預留足夠時間，1.5 hr)" },
+                { time: "15:30", item: "那霸機場報到與登機 (機場免稅店補貨)" },
+                { time: "17:30", item: "登機返程" }
+            ],
+            tip: "還車通常需要排隊，請預留充足時間，特別是國際航班，建議提前 3 小時抵達機場。"
+        }
+    ];
+
+    // 3. VIBE 介面生成邏輯
+    const tripList = document.getElementById('trip-list');
+
+    tripData.forEach(day => {
+        const card = document.createElement('div');
+        card.className = 'trip-card';
+        card.setAttribute('data-day', day.day);
+
+        // 卡片標題
+        card.innerHTML = `
+            <div class="day-title" onclick="toggleDetails(${day.day})">
+                <span class="icon">${day.icon} Day ${day.day} (${day.date})</span>
+                ${day.title}
+            </div>
+            <div class="weather-box">
+                <span class="info-label">天氣狀況:</span> 
+                <span class="highlight">${day.weatherInfo}</span>
+            </div>
+            <div class="details" id="details-day-${day.day}">
+                ${day.activities.map(activity => 
+                    `<p><span class="time-slot">${activity.time}</span> ${activity.item}</p>`
+                ).join('')}
+                <div class="detail-tip">
+                    <span class="highlight">💡 旅遊建議:</span> ${day.tip}
+                </div>
+            </div>
+        `;
+
+        tripList.appendChild(card);
+    });
+
+    // 4. 互動邏輯：展開/收合
+    function toggleDetails(dayNum) {
+        const detailsDiv = document.getElementById(`details-day-${dayNum}`);
+        if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
+            detailsDiv.style.display = 'block';
+        } else {
+            detailsDiv.style.display = 'none';
+        }
+    }
+
+    // 預設展開第一天的細節
+    toggleDetails(1); 
+</script>
+
+</body>
+</html>
