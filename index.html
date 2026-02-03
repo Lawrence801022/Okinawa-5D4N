@@ -60,11 +60,45 @@
             color: #7dd3fc;
             text-decoration: underline;
         }
+        .intro-link {
+            color: #818cf8;
+            font-size: 0.75rem;
+            margin-left: 4px;
+            transition: color 0.2s;
+        }
+        .intro-link:hover {
+            color: #a5b4fc;
+            text-decoration: underline;
+        }
         .intro-text {
             color: #94a3b8;
             font-size: 0.75rem;
             margin-top: 2px;
             line-height: 1.4;
+        }
+        .photo-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            scrollbar-width: none;
+        }
+        .photo-gallery::-webkit-scrollbar {
+            display: none;
+        }
+        .photo-placeholder {
+            min-width: 140px;
+            height: 90px;
+            background: #1e293b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.65rem;
+            color: #64748b;
+            border: 1px dashed rgba(255,255,255,0.1);
+            padding: 5px;
         }
     </style>
 </head>
@@ -141,29 +175,49 @@
                             <p class="mt-1 font-semibold text-slate-200">
                                 <a href="https://www.google.com/maps/search/?api=1&query=ORIX+Rent+A+Car+Naha+Airport" target="_blank" class="map-link">ORIX 租車 📍</a> / 
                                 <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium" target="_blank" class="map-link">DMM 水族館 📍</a>
-                                <span class="cost-badge">預估 門票￥2,400</span>
+                                <a href="https://kariyushi-aquarium.com/" target="_blank" class="intro-link">🔗 介紹</a>
+                                <span class="cost-badge">預估 每人￥2,400</span>
                             </p>
                             <p class="intro-text">結合數位影像與真實生物，透過聲光效果打造沉浸式的海底觀賞體驗。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-slate-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
-                            <p class="mt-1 font-semibold text-slate-200">【午餐】<a href="https://www.google.com/maps/search/?api=1&query=iias+Okinawa+Toyosaki" target="_blank" class="map-link">iias 沖繩豐崎購物中心 📍</a><span class="cost-badge">預估 ￥1,500+</span></p>
+                            <p class="mt-1 font-semibold text-slate-200">【午餐】<a href="https://www.google.com/maps/search/?api=1&query=iias+Okinawa+Toyosaki" target="_blank" class="map-link">iias 沖繩豐崎購物中心 📍</a><a href="https://toyosaki.iias.jp/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">預估 每人￥1,500+</span></p>
                             <p class="intro-text">機場附近大型商場，集結美食與品牌，適合剛抵達時進行採買與用餐。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-slate-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 20min</span>
-                            <p class="mt-1 font-semibold text-slate-200"><a href="https://www.google.com/maps/search/?api=1&query=Naminoue+Shrine" target="_blank" class="map-link">波上宮 - 海灘上的絕美神社 📍</a><span class="cost-badge">預估 免費</span></p>
+                            <p class="mt-1 font-semibold text-slate-200"><a href="https://www.google.com/maps/search/?api=1&query=Naminoue+Shrine" target="_blank" class="map-link">波上宮 - 海灘上的絕美神社 📍</a><a href="http://naminouegu.jp/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">免費</span></p>
                             <p class="intro-text">矗立在斷崖上的守護神，緊鄰那霸唯一的海灘，是祈福與美拍的必訪景點。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-slate-900/40 p-3 rounded-xl">
-                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Danbo+Ramen+Nago" target="_blank" class="map-link">暖暮拉麵-名護店 📍</a><span class="cost-badge">預估 ￥1,200</span></p>
+                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Danbo+Ramen+Nago" target="_blank" class="map-link">暖暮拉麵-名護店 📍</a><span class="cost-badge">預估 每人￥1,200</span></p>
                         <p class="intro-text mb-2">曾獲九州拉麵票選第一，湯頭濃厚而不膩口，是造訪沖繩排隊首選。</p>
+                        <div class="photo-gallery">
+                            <div class="photo-placeholder"></div>
+                            <div class="photo-placeholder"></div>
+                        </div>
                         <p class="text-sm">🏨 <span class="font-bold">宿:</span> <a href="https://www.google.com/maps/search/?api=1&query=Sunset+Resort+Canphou" target="_blank" class="map-link text-sky-400 underline">Sunset Resort Canphou 📍</a></p>
                     </div>
                 </div>
@@ -182,37 +236,59 @@
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
-                            <p class="font-semibold">【早餐】<a href="https://www.google.com/maps/search/?api=1&query=Potama+Motobu" target="_blank" class="map-link">Potama 沖繩飯糰-本部町店 📍</a><span class="cost-badge">預估 ￥700</span></p>
+                            <p class="font-semibold">【早餐】<a href="https://www.google.com/maps/search/?api=1&query=Potama+Motobu" target="_blank" class="map-link">Potama 沖繩飯糰-本部町店 📍</a><span class="cost-badge">預估 每人￥700</span></p>
                             <p class="intro-text">沖繩特有的豬肉蛋飯糰，現點現做用料紮實，是充滿在地風味的人氣早點。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 3min</span>
-                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Okinawa+Churaumi+Aquarium" target="_blank" class="map-link">美麗海水族館 (Churaumi) 📍</a><span class="cost-badge">預估 ￥2,180</span></p>
+                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Okinawa+Churaumi+Aquarium" target="_blank" class="map-link">美麗海水族館 (Churaumi) 📍</a><a href="https://churaumi.okinawa/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">預估 每人￥2,180</span></p>
                             <p class="intro-text">擁有世界級大水槽「黑潮之海」，能觀賞壯闊鯨鯊游弋，是沖繩的經典地標。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 6min</span>
-                            <p class="font-semibold">【午餐】<a href="https://www.google.com/maps/search/?api=1&query=Kaisho+Maru+Motobu" target="_blank" class="map-link">海人料理海邦丸 2號店 📍</a><span class="cost-badge">預估 ￥2,500+</span></p>
+                            <p class="font-semibold">【午餐】<a href="https://www.google.com/maps/search/?api=1&query=Kaisho+Maru+Motobu" target="_blank" class="map-link">海人料理海邦丸 2號店 📍</a><span class="cost-badge">預估 每人￥2,500+</span></p>
                             <p class="intro-text">鄰近水族館的鮮魚料理店，提供份量十足的海鮮蓋飯與定食，深受老饕喜愛。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 10/40min</span>
-                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Nago+Pineapple+Park" target="_blank" class="map-link">名護鳳梨園 📍</a><span class="cost-badge">預估 ￥1,200</span> / <a href="https://www.google.com/maps/search/?api=1&query=Manzamo" target="_blank" class="map-link">萬座毛 📍</a><span class="cost-badge">預估 ￥100</span></p>
+                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Nago+Pineapple+Park" target="_blank" class="map-link">名護鳳梨園 📍</a><a href="https://www.nagopine.com/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">預估 每人￥1,200</span> / <a href="https://www.google.com/maps/search/?api=1&query=Manzamo" target="_blank" class="map-link">萬座毛 📍</a><a href="https://www.manzamo.jp/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">預估 每人￥100</span></p>
                             <p class="intro-text">鳳梨園可搭乘無人小車暢遊，萬座毛則有外型如象鼻的奇岩，是賞海景佳選。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-slate-900/40 p-3 rounded-xl">
-                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Gourmet+Kaiten-sushi+Ichiba" target="_blank" class="map-link">美國村 壽司市場 📍</a><span class="cost-badge">預估 ￥3,500+</span></p>
+                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Gourmet+Kaiten-sushi+Ichiba" target="_blank" class="map-link">美國村 壽司市場 📍</a><span class="cost-badge">預估 每人￥3,500+</span></p>
                         <p class="intro-text mb-2">人氣極高的迴轉壽司，魚貨新鮮選擇多樣，讓您在美式氛圍中享受日式美味。</p>
+                        <div class="photo-gallery">
+                            <div class="photo-placeholder"></div>
+                            <div class="photo-placeholder"></div>
+                        </div>
                         <p class="text-sm">🏨 <span class="font-bold">宿:</span> <a href="https://www.google.com/maps/search/?api=1&query=The+Hotel+Chatan+by+Sunrest+Resort" target="_blank" class="map-link text-sky-400 underline">The Hotel Chatan 📍</a></p>
                     </div>
                 </div>
@@ -231,29 +307,47 @@
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
-                            <p class="font-semibold">【早午餐】<a href="https://www.google.com/maps/search/?api=1&query=WaGyu+Cafe+KAPUKA" target="_blank" class="map-link">WaGyu Cafe KAPUKA 📍</a><span class="cost-badge">預估 ￥3,000+</span></p>
+                            <p class="font-semibold">【早午餐】<a href="https://www.google.com/maps/search/?api=1&query=WaGyu+Cafe+KAPUKA" target="_blank" class="map-link">WaGyu Cafe KAPUKA 📍</a><span class="cost-badge">預估 每人￥3,000+</span></p>
                             <p class="intro-text">位於北谷海邊的網美咖啡廳，主打精緻和牛早午餐與彩虹沙拉，海景第一排。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 40min</span>
-                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Gyokusendo+Cave" target="_blank" class="map-link">玉泉洞 - 鐘乳石洞窟 📍</a><span class="cost-badge">預估 ￥2,000</span></p>
+                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Gyokusendo+Cave" target="_blank" class="map-link">玉泉洞 - 鐘乳石洞窟 📍</a><a href="https://www.gyokusendo.co.jp/okinawaworld/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">預估 每人￥2,000</span></p>
                             <p class="intro-text">擁有30萬年歷史的宏偉鐘乳石洞，步道長度驚人，是大自然鬼斧神工的傑作。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 40min</span>
-                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Mihama+American+Village" target="_blank" class="map-link">美國村 - Shopping 📍</a><span class="cost-badge">預估 依個人消費</span></p>
+                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Mihama+American+Village" target="_blank" class="map-link">美國村 - Shopping 📍</a><a href="https://www.okinawa-americanvillage.com/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">免費參觀</span></p>
                             <p class="intro-text">融合異國風情的休閒娛樂區，遍布特色小店與品牌，是購買紀念品與散步的好去處。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-slate-900/40 p-3 rounded-xl">
-                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Robatayaki+Boo+Chatan" target="_blank" class="map-link">爐端燒 Boo 北谷店 📍</a><span class="cost-badge">預估 ￥5,000+</span></p>
+                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Robatayaki+Boo+Chatan" target="_blank" class="map-link">爐端燒 Boo 北谷店 📍</a><span class="cost-badge">預估 每人￥5,000+</span></p>
                         <p class="intro-text mb-2">溫馨的爐端燒餐酒館，主打現烤在地食材，氣氛熱絡，非常適合夜晚小酌聚會。</p>
+                        <div class="photo-gallery">
+                            <div class="photo-placeholder"></div>
+                            <div class="photo-placeholder"></div>
+                        </div>
                         <p class="text-sm">🏨 <span class="font-bold">宿:</span> <a href="https://www.google.com/maps/search/?api=1&query=The+Hotel+Chatan+by+Sunrest+Resort" target="_blank" class="map-link text-sky-400 underline">The Hotel Chatan 📍</a></p>
                     </div>
                 </div>
@@ -273,15 +367,24 @@
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="drive-badge">🚗 50min</span>
-                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Umikaji+Terrace+Senagajima" target="_blank" class="map-link">瀨長島 - 沖繩小希臘 📍</a><span class="cost-badge">預估 免費參觀</span></p>
-                            <p class="intro-text">純白建築群層疊在海濱，可近距離觀看飛機起降，氛圍極其浪漫與放鬆。</p>
+                            <p class="font-semibold"><a href="https://www.google.com/maps/search/?api=1&query=Umikaji+Terrace+Senagajima" target="_blank" class="map-link">瀨長島 - 沖繩小希臘 📍</a><a href="https://www.umikajiterrace.com/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">免費參觀</span></p>
+                            <p class="intro-text">純白建築群層疊在海濱，可看飛機起降。追求舒服建議選**幸福鬆餅**露台位，或山頂**Posillipo**室內冷氣海景位。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
-                            <p class="font-semibold">【午餐】<a href="https://www.google.com/maps/search/?api=1&query=Poke+Boo+Senagajima" target="_blank" class="map-link">Poke Boo 📍</a> / <a href="https://www.google.com/maps/search/?api=1&query=Oyaji+no+Maguro" target="_blank" class="map-link">父親的鮪魚 📍</a><span class="cost-badge">預估 ￥2,000</span></p>
-                            <p class="intro-text">主打新鮮近海鮪魚與清爽波奇飯，魚肉鮮美甘甜，是在瀨長島賞景時的輕食佳選。</p>
+                            <p class="font-semibold">【午餐】<a href="https://www.google.com/maps/search/?api=1&query=Poke+Boo+Senagajima" target="_blank" class="map-link">Poke Boo 📍</a> / <a href="https://www.google.com/maps/search/?api=1&query=Oyaji+no+Maguro" target="_blank" class="map-link">父親的鮪魚 📍</a><span class="cost-badge">預估 每人￥2,000</span></p>
+                            <p class="intro-text">主打新鮮近海鮪魚與清爽波奇飯，魚肉鮮美甘甜。若店內客滿，也可外帶至露天階梯區享用海景。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -296,11 +399,20 @@
                         <div class="pb-4">
                             <p class="font-semibold text-slate-200">國際通 - Shopping</p>
                             <p class="intro-text">那霸最繁華的奇蹟大街，充滿各式紀念品店與伴手禮，是旅程最終採買站。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-placeholder"></div>
+                                <div class="photo-placeholder"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-slate-900/40 p-3 rounded-xl">
-                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Makishi+Public+Market" target="_blank" class="map-link">牧志公設市場 📍</a><span class="cost-badge">預估 ￥4,000+</span></p>
+                        <p class="text-sm">🍽️ <span class="font-bold">晚餐:</span> <a href="https://www.google.com/maps/search/?api=1&query=Makishi+Public+Market" target="_blank" class="map-link">牧志公設市場 📍</a><a href="https://kosetsu-ichiba.com/" target="_blank" class="intro-link">🔗 介紹</a><span class="cost-badge">預估 每人￥4,000+</span></p>
                         <p class="intro-text mb-2">沖繩人的廚房，一樓挑選生猛海鮮，二樓代客料理，體驗道地庶民飲食文化。</p>
+                        <div class="photo-gallery">
+                            <div class="photo-placeholder"></div>
+                            <div class="photo-placeholder"></div>
+                            <div class="photo-placeholder"></div>
+                        </div>
                         <p class="text-sm">🏨 <span class="font-bold">宿:</span> <a href="https://www.google.com/maps/search/?api=1&query=Hotel+WBF+ART+STAY+Naha" target="_blank" class="map-link text-sky-400 underline">WBF ART STAY 那霸 📍</a></p>
                     </div>
                 </div>
@@ -320,7 +432,7 @@
                         <div class="flex flex-col items-center"><div class="w-3 h-3 bg-sky-500 rounded-full"></div><div class="w-0.5 h-full bg-slate-700"></div></div>
                         <div class="pb-4">
                             <span class="time-badge">10:30</span>
-                            <p class="font-semibold text-slate-200"><a href="https://www.google.com/maps/search/?api=1&query=Naha+Airport+Monorail+Station" target="_blank" class="map-link">搭單軌電車至機場 📍</a><span class="cost-badge">預估 ￥300</span></p>
+                            <p class="font-semibold text-slate-200"><a href="https://www.google.com/maps/search/?api=1&query=Naha+Airport+Monorail+Station" target="_blank" class="map-link">搭單軌電車至機場 📍</a><span class="cost-badge">預估 每人￥300</span></p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3 mt-4">
