@@ -2,394 +2,450 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Okinawa Vibe 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background: linear-gradient(135deg, #fce7f3 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #fdf2f8 0%, #e0f2fe 100%);
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
         }
-        .app-header {
-            font-family: 'Montserrat', sans-serif;
-        }
+        .app-header { font-family: 'Montserrat', sans-serif; }
+        
         .vibe-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 2rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-            border: 2px solid #ffffff;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+            border: 1px solid #ffffff;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
-        .vibe-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+        .day-header {
+            cursor: pointer;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .day-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            display: none; /* 預設隱藏 */
+        }
+
+        .day-content.active {
+            display: block;
+        }
+
         .day-tag {
-            background: linear-gradient(90deg, #ec4899, #f43f5e);
+            background: linear-gradient(90deg, #f43f5e, #fb923c);
             color: white;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 9999px;
             font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 1px;
         }
+
         .cost-badge {
-            background: #dcfce7;
-            color: #166534;
-            padding: 2px 10px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
-        .map-btn {
-            background: #f0f9ff;
-            color: #0369a1;
-            padding: 4px 10px;
+            background: #f0fdf4;
+            color: #15803d;
+            padding: 3px 10px;
             border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid #bae6fd;
+            font-size: 0.7rem;
+            font-weight: 800;
+            border: 1px solid #dcfce7;
+            display: inline-block;
         }
+
+        .map-btn {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid #dbeafe;
+        }
+
         .intro-link {
             color: #6366f1;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: underline;
-            text-underline-offset: 3px;
+            text-underline-offset: 4px;
         }
+
         .photo-gallery {
             display: flex;
             overflow-x: auto;
             gap: 12px;
-            padding: 12px 0;
+            padding: 10px 0;
             scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
         }
         .photo-gallery::-webkit-scrollbar { display: none; }
+
         .photo-box {
-            min-width: 200px;
-            height: 140px;
-            border-radius: 1.25rem;
+            min-width: 240px;
+            height: 160px;
+            border-radius: 1.5rem;
             background: #f1f5f9;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 4px solid white;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-align: center;
+            padding: 10px;
         }
         .photo-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .weather-pill {
             background: white;
-            border-radius: 1.5rem;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 1.2rem;
+            padding: 10px 4px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,255,255,0.8);
         }
+
+        .itinerary-line {
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(to bottom, #f43f5e, #3b82f6);
+            opacity: 0.15;
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+            color: #94a3b8;
+        }
+        .active-chevron { transform: rotate(180deg); }
     </style>
 </head>
-<body class="p-5 md:p-10">
+<body class="p-4 sm:p-8">
 
-    <div class="max-w-xl mx-auto">
+    <div class="max-w-screen-sm mx-auto">
         <!-- Main Header -->
-        <header class="text-center mb-10 app-header">
-            <h1 class="text-5xl font-black text-slate-900 tracking-tighter mb-2">OKINAWA<span class="text-rose-500">!</span></h1>
-            <p class="text-slate-500 font-bold text-sm">FEB 07 - FEB 11 · 2026 FUN TRIP</p>
-            <div class="flex justify-center gap-3 mt-6">
-                <div class="bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100 flex flex-col">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase">Flight</span>
-                    <span class="text-xs font-black">CI / TG 08:10</span>
+        <header class="text-center mb-8 app-header">
+            <div class="inline-block mb-3 px-4 py-1 bg-white rounded-full text-rose-500 font-black text-[10px] tracking-widest shadow-sm uppercase">Okinawa Fun Vibe 2026</div>
+            <h1 class="text-6xl font-black text-slate-900 tracking-tighter mb-2">ALOHA<span class="text-rose-500">!</span></h1>
+            <p class="text-slate-400 font-bold text-xs tracking-widest uppercase">Feb 07 — Feb 11 · Your Best Trip</p>
+            
+            <div class="flex justify-center gap-3 mt-8">
+                <div class="bg-white px-4 py-3 rounded-2xl shadow-xl flex-1 border border-white">
+                    <span class="text-[9px] text-rose-400 font-black uppercase block mb-1">Flight Out</span>
+                    <span class="text-sm font-black text-slate-800 uppercase">CI/TG 08:10</span>
                 </div>
-                <div class="bg-white px-4 py-2 rounded-2xl shadow-sm border border-slate-100 flex flex-col">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase">Car</span>
-                    <span class="text-xs font-black">ORIX RENTAL</span>
+                <div class="bg-white px-4 py-3 rounded-2xl shadow-xl flex-1 border border-white">
+                    <span class="text-[9px] text-blue-400 font-black uppercase block mb-1">Car Rental</span>
+                    <span class="text-sm font-black text-slate-800 uppercase">ORIX OKA</span>
                 </div>
             </div>
         </header>
 
-        <!-- Weather Section -->
-        <section class="mb-10">
-            <div class="grid grid-cols-5 gap-3">
-                <div class="weather-pill text-center">
-                    <p class="text-[9px] font-bold text-slate-400">2/07</p>
-                    <span class="text-lg">🌥️</span>
-                    <p class="text-[10px] font-black text-slate-700">18°</p>
-                </div>
-                <div class="weather-pill text-center border-rose-200 bg-rose-50">
-                    <p class="text-[9px] font-bold text-rose-400">2/08</p>
-                    <span class="text-lg">☀️</span>
-                    <p class="text-[10px] font-black text-rose-700">20°</p>
-                </div>
-                <div class="weather-pill text-center">
-                    <p class="text-[9px] font-bold text-slate-400">2/09</p>
-                    <span class="text-lg">☁️</span>
-                    <p class="text-[10px] font-black text-slate-700">17°</p>
-                </div>
-                <div class="weather-pill text-center">
-                    <p class="text-[9px] font-bold text-slate-400">2/10</p>
-                    <span class="text-lg">🌦️</span>
-                    <p class="text-[10px] font-black text-slate-700">16°</p>
-                </div>
-                <div class="weather-pill text-center">
-                    <p class="text-[9px] font-bold text-slate-400">2/11</p>
-                    <span class="text-lg">☀️</span>
-                    <p class="text-[10px] font-black text-slate-700">19°</p>
-                </div>
+        <!-- Weather Summary -->
+        <section class="mb-8">
+            <div class="grid grid-cols-5 gap-2">
+                <div class="weather-pill text-center"><p class="text-[8px] font-bold text-slate-400">2/07</p><span class="text-xl">🌥️</span><p class="text-[10px] font-black text-slate-700 mt-1">18°</p></div>
+                <div class="weather-pill text-center border-rose-100 bg-rose-50/30"><p class="text-[8px] font-bold text-rose-400">2/08</p><span class="text-xl">☀️</span><p class="text-[10px] font-black text-rose-700 mt-1">20°</p></div>
+                <div class="weather-pill text-center"><p class="text-[8px] font-bold text-slate-400">2/09</p><span class="text-xl">☁️</span><p class="text-[10px] font-black text-slate-700 mt-1">17°</p></div>
+                <div class="weather-pill text-center"><p class="text-[8px] font-bold text-slate-400">2/10</p><span class="text-xl">🌦️</span><p class="text-[10px] font-black text-slate-700 mt-1">16°</p></div>
+                <div class="weather-pill text-center"><p class="text-[8px] font-bold text-slate-400">2/11</p><span class="text-xl">☀️</span><p class="text-[10px] font-black text-slate-700 mt-1">19°</p></div>
             </div>
         </section>
 
-        <!-- Timeline Starts -->
-        <div class="space-y-8">
+        <!-- Timeline -->
+        <div class="space-y-4">
+            
             <!-- Day 1 -->
-            <div class="vibe-card p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="day-tag">Day 1</span>
-                    <h2 class="text-xl font-black text-slate-800">啟程！絕美海灘神社</h2>
+            <div class="vibe-card">
+                <div class="day-header" onclick="toggleDay('day1')">
+                    <div class="flex items-center gap-3">
+                        <span class="day-tag">Day 1</span>
+                        <h2 class="text-lg font-black text-slate-800">數位海洋與懸崖神社</h2>
+                    </div>
+                    <svg id="chevron-day1" class="chevron w-6 h-6 active-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-                
-                <div class="space-y-8 relative before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-1 before:bg-slate-100">
-                    <!-- Spot 1.1 -->
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">DMM 水族館</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="https://kariyushi-aquarium.com/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">預估 每人￥2,400</span>
+                <div id="day1" class="day-content active">
+                    <div class="relative ml-4">
+                        <div class="itinerary-line"></div>
+                        
+                        <!-- DMM -->
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-rose-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">DMM 水族館</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="https://kariyushi-aquarium.com/" target="_blank" class="intro-link">介紹🔗</a>
+                            </div>
+                            <div class="mt-1"><span class="cost-badge">預估 每人￥2,400</span></div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">融合數位藝術影像與真實生物，體驗「海洋」與「森林」交織的奇幻沉浸空間。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
                         </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">結合數位影像與真實生物，透過絕美聲光打造沉浸式的海底觀賞體驗。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80" alt="DMM 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&q=80" alt="DMM 2"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=400&q=80" alt="DMM 3"></div>
-                        </div>
-                    </div>
 
-                    <!-- Spot 1.2 -->
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">iias 沖繩豐崎</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=iias+Okinawa+Toyosaki" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="https://toyosaki.iias.jp/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">預估 每人￥1,500+</span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">機場附近大型商場，集結美食與品牌，適合剛抵達時進行採買與用餐。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=80" alt="iias 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=400&q=80" alt="iias 2"></div>
-                        </div>
-                    </div>
-
-                    <!-- Spot 1.3 -->
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-amber-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">波上宮</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Naminoue+Shrine" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="http://naminouegu.jp/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">免費</span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">矗立在斷崖上的守護神，緊鄰那霸唯一的海灘，是祈福與美拍的必訪地。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1528164344705-4754268799af?w=400&q=80" alt="Shrine 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1542931237-323a191845cc?w=400&q=80" alt="Shrine 2"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&q=80" alt="Shrine 3"></div>
+                        <!-- 波上宮 -->
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-blue-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">波上宮</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Naminoue+Shrine" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="http://naminouegu.jp/" target="_blank" class="intro-link">介紹🔗</a>
+                                <span class="cost-badge">免費</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">矗立在斷崖上的琉球八社之首，緊鄰純淨沙灘，是沖繩最具代表性的絕景神社。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-8 pt-6 border-t-2 border-dashed border-slate-100 flex flex-col gap-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">DINNER</span>
-                        <span class="text-sm font-black text-rose-500">暖暮拉麵-名護店 📍</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">STAY</span>
-                        <span class="text-sm font-black text-slate-800 underline underline-offset-4 decoration-sky-300">坎普日落度假村 📍</span>
+                    <div class="mt-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 flex justify-between items-center">
+                        <span class="text-xs font-black text-slate-400 uppercase">Dinner</span>
+                        <span class="text-sm font-black text-rose-500">暖暮拉麵-名護店 🍜</span>
                     </div>
                 </div>
             </div>
 
             <!-- Day 2 -->
-            <div class="vibe-card p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="day-tag" style="background: linear-gradient(90deg, #0ea5e9, #3b82f6);">Day 2</span>
-                    <h2 class="text-xl font-black text-slate-800">鯨鯊與美國村之夜</h2>
+            <div class="vibe-card">
+                <div class="day-header" onclick="toggleDay('day2')">
+                    <div class="flex items-center gap-3">
+                        <span class="day-tag" style="background: linear-gradient(90deg, #3b82f6, #2dd4bf);">Day 2</span>
+                        <h2 class="text-lg font-black text-slate-800">鯨鯊傳說與象鼻岩</h2>
+                    </div>
+                    <svg id="chevron-day2" class="chevron w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-                
-                <div class="space-y-8 relative before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-1 before:bg-slate-100">
-                    <!-- Spot 2.1 -->
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-sky-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">美麗海水族館</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Okinawa+Churaumi+Aquarium" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="https://churaumi.okinawa/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">預估 每人￥2,180</span>
+                <div id="day2" class="day-content">
+                    <div class="relative ml-4">
+                        <div class="itinerary-line"></div>
+                        
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-sky-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">美麗海水族館</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Okinawa+Churaumi+Aquarium" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="https://churaumi.okinawa/" target="_blank" class="intro-link">介紹🔗</a>
+                            </div>
+                            <div class="mt-1"><span class="cost-badge">預估 每人￥2,180</span></div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">世界級巨大水槽「黑潮之海」，近距離觀賞壯闊鯨鯊與魟魚穿梭的震撼景象。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
                         </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">擁有世界級大水槽「黑潮之海」，能觀賞鯨鯊游弋，是沖繩的經典地標。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1509721148483-fb5529170791?w=400&q=80" alt="Shark 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1544551763-8dd44758c2dd?w=400&q=80" alt="Shark 2"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1518020482117-27f744211d94?w=400&q=80" alt="Shark 3"></div>
-                        </div>
-                    </div>
 
-                    <!-- Spot 2.2 -->
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">萬座毛 / 鳳梨園</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Manzamo" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="https://www.manzamo.jp/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">預估 每人￥1,300</span>
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">萬座毛</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Manzamo" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="https://www.manzamo.jp/" target="_blank" class="intro-link">介紹🔗</a>
+                                <span class="cost-badge">預估 每人￥100</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">天然形成的象鼻狀海蝕奇景，搭配廣闊的翠綠草地與絕美渐層蔚藍海景。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
                         </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">外型如象鼻的奇岩與可愛鳳梨小車，感受沖繩的海景與自然活力。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=400&q=80" alt="Nature 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1551615593-ef5fe247e8f7?w=400&q=80" alt="Nature 2"></div>
+                    </div>
+                    <div class="mt-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+                        <div class="flex justify-between items-center text-xs font-black">
+                            <span class="text-slate-400">BREAKFAST</span>
+                            <span class="text-blue-500">Potama 豬肉蛋飯糰 🍙</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 pt-6 border-t-2 border-dashed border-slate-100 flex flex-col gap-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">BREAKFAST</span>
-                        <span class="text-sm font-black text-blue-500">Potama 豬肉蛋飯糰 📍</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">DINNER</span>
-                        <span class="text-sm font-black text-orange-500">美國村 壽司市場 📍</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">STAY</span>
-                        <span class="text-sm font-black text-slate-800">The Hotel Chatan 📍</span>
+                        <div class="flex justify-between items-center text-xs font-black">
+                            <span class="text-slate-400">DINNER</span>
+                            <span class="text-orange-500">美國村 壽司市場 🍣</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Day 3 -->
-            <div class="vibe-card p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="day-tag" style="background: linear-gradient(90deg, #8b5cf6, #d946ef);">Day 3</span>
-                    <h2 class="text-xl font-black text-slate-800">地底冒險與和牛時光</h2>
-                </div>
-                
-                <div class="space-y-8 relative before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-1 before:bg-slate-100">
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-purple-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">玉泉洞 鐘乳石洞</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Gyokusendo+Cave" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="https://www.gyokusendo.co.jp/okinawaworld/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">預估 每人￥2,000</span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">擁有30萬年歷史的宏偉地底世界，步道長度驚人，是大自然的奇蹟。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1542332213-31f87348057f?w=400&q=80" alt="Cave 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1502675135487-e971002a6adb?w=400&q=80" alt="Cave 2"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1520188129108-30ab6f439140?w=400&q=80" alt="Cave 3"></div>
-                        </div>
+            <div class="vibe-card">
+                <div class="day-header" onclick="toggleDay('day3')">
+                    <div class="flex items-center gap-3">
+                        <span class="day-tag" style="background: linear-gradient(90deg, #8b5cf6, #d946ef);">Day 3</span>
+                        <h2 class="text-lg font-black text-slate-800">地底冒險與美式風情</h2>
                     </div>
+                    <svg id="chevron-day3" class="chevron w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
+                <div id="day3" class="day-content">
+                    <div class="relative ml-4">
+                        <div class="itinerary-line"></div>
+                        
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-purple-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">玉泉洞</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Gyokusendo+Cave" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="https://www.gyokusendo.co.jp/okinawaworld/" target="_blank" class="intro-link">介紹🔗</a>
+                            </div>
+                            <div class="mt-1"><span class="cost-badge">預估 每人￥2,000</span></div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">日本最壯觀的鐘乳石洞，全長五公里，步道兩側充滿神祕地底泉水與奇石。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
+                        </div>
 
-                <div class="mt-8 pt-6 border-t-2 border-dashed border-slate-100 flex flex-col gap-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">BRUNCH</span>
-                        <span class="text-sm font-black text-purple-600">WaGyu Cafe KAPUKA 📍</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">DINNER</span>
-                        <span class="text-sm font-black text-slate-900">爐端燒 Boo 北谷店 📍</span>
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-pink-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">美國村</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Mihama+American+Village" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="https://www.okinawa-americanvillage.com/" target="_blank" class="intro-link">介紹🔗</a>
+                                <span class="cost-badge">免費參觀</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">融合美日風情的休閒園區，充滿繽紛彩色建築與異國商店，是拍照打卡聖地。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Day 4 -->
-            <div class="vibe-card p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="day-tag" style="background: linear-gradient(90deg, #10b981, #34d399);">Day 4</span>
-                    <h2 class="text-xl font-black text-slate-800">小希臘與最終採買</h2>
-                </div>
-                
-                <div class="space-y-8 relative before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-1 before:bg-slate-100">
-                    <div class="pl-10 relative">
-                        <div class="absolute left-1.5 top-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white shadow-sm"></div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="font-black text-slate-900">瀨長島小希臘</span>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Umikaji+Terrace+Senagajima" target="_blank" class="map-btn">📍 地圖</a>
-                            <a href="https://www.umikajiterrace.com/" target="_blank" class="intro-link">介紹🔗</a>
-                            <span class="cost-badge">免費參觀</span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">純白建築層疊在海濱，可近看飛機起降。推薦幸福鬆餅或Posillipo餐廳。</p>
-                        <div class="photo-gallery">
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1542931415-162aeab4418f?w=400&q=80" alt="White 1"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=400&q=80" alt="White 2"></div>
-                            <div class="photo-box"><img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=400&q=80" alt="White 3"></div>
-                        </div>
+            <div class="vibe-card">
+                <div class="day-header" onclick="toggleDay('day4')">
+                    <div class="flex items-center gap-3">
+                        <span class="day-tag" style="background: linear-gradient(90deg, #10b981, #34d399);">Day 4</span>
+                        <h2 class="text-lg font-black text-slate-800">小希臘與國際通</h2>
                     </div>
+                    <svg id="chevron-day4" class="chevron w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
+                <div id="day4" class="day-content">
+                    <div class="relative ml-4">
+                        <div class="itinerary-line"></div>
+                        
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">瀨長島小希臘</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Umikaji+Terrace+Senagajima" target="_blank" class="map-btn">📍 地圖</a>
+                                <a href="https://www.umikajiterrace.com/" target="_blank" class="intro-link">介紹🔗</a>
+                                <span class="cost-badge">免費參觀</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">純白梯田式建築群，能在露台享用美食並近距離看飛機起降，氛圍極其度假。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
+                        </div>
 
-                <div class="mt-8 pt-6 border-t-2 border-dashed border-slate-100 flex flex-col gap-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">LUNCH</span>
-                        <span class="text-sm font-black text-emerald-600">父親的鮪魚 📍</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">SHOPPING</span>
-                        <span class="text-sm font-black text-slate-900 font-black">國際通 Shopping 🛍️</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-black text-slate-400">STAY</span>
-                        <span class="text-sm font-black text-slate-800">WBF ART STAY 那霸 📍</span>
+                        <div class="mb-10 relative pl-8">
+                            <div class="absolute left-[-29px] top-2 w-3 h-3 bg-orange-500 rounded-full"></div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-md font-black text-slate-900">國際通</span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Kokusai+Dori+Okinawa" target="_blank" class="map-btn">📍 地圖</a>
+                                <span class="cost-badge">免費逛街</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">沖繩最繁華的奇蹟大街，集結伴手禮、在地料理與文創小店，採買的首選地。</p>
+                            <div class="photo-gallery">
+                                <div class="photo-box"></div>
+                                <div class="photo-box"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Day 5 -->
             <div class="vibe-card p-6 bg-slate-900 border-none">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="day-tag" style="background: white; color: black;">Day 5</span>
-                    <h2 class="text-xl font-black text-white">掰掰沖繩！回溫暖的家</h2>
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="day-tag" style="background: white; color: black; box-shadow: none;">END</span>
+                        <h2 class="text-xl font-black text-white">掰掰沖繩！回溫暖的家</h2>
+                    </div>
                 </div>
-                
-                <div class="flex flex-col gap-4 mt-6">
-                    <div class="flex justify-between bg-white/10 p-4 rounded-2xl border border-white/10">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] text-slate-400 font-black uppercase">Flight CI</span>
-                            <span class="text-lg font-black text-white">11:55</span>
+                <div class="space-y-4">
+                    <div class="bg-white/10 p-5 rounded-3xl border border-white/10 flex justify-between">
+                        <div>
+                            <p class="text-[9px] text-slate-400 font-black uppercase mb-1">CI Flight</p>
+                            <p class="text-xl font-black text-white">11:55</p>
                         </div>
-                        <div class="flex flex-col items-end">
-                            <span class="text-[10px] text-slate-400 font-black uppercase">Flight TG</span>
-                            <span class="text-lg font-black text-white">13:30</span>
+                        <div class="text-right">
+                            <p class="text-[9px] text-slate-400 font-black uppercase mb-1">TG Flight</p>
+                            <p class="text-xl font-black text-white">13:30</p>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-400 text-center italic">10:30 搭單軌電車前往機場 📍 預估 ￥300</p>
+                    <p class="text-[11px] text-slate-400 text-center font-bold italic">
+                        10:30 搭乘單軌電車前往機場 📍 預估 ￥300
+                    </p>
+                    <div class="photo-gallery mt-2">
+                        <div class="photo-box" style="min-width: 100%; height: 180px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
-        <footer class="mt-20 mb-20 text-center">
-            <div class="flex justify-center gap-6 mb-4">
-                <a href="https://www.google.com/maps" target="_blank" class="text-[10px] font-black tracking-widest text-slate-400 hover:text-rose-500 transition-colors uppercase">Maps</a>
-                <a href="https://www.yui-rail.co.jp/" target="_blank" class="text-[10px] font-black tracking-widest text-slate-400 hover:text-sky-500 transition-colors uppercase">Monorail</a>
+        <footer class="mt-12 mb-20 text-center">
+            <div class="flex justify-center gap-8 mb-6">
+                <a href="https://www.google.com/maps" target="_blank" class="text-[10px] font-black tracking-widest text-slate-400 hover:text-rose-500 uppercase">Maps</a>
+                <a href="https://www.yui-rail.co.jp/" target="_blank" class="text-[10px] font-black tracking-widest text-slate-400 hover:text-blue-500 uppercase">Train</a>
             </div>
-            <p class="text-[10px] text-slate-300 font-bold uppercase tracking-[0.2em]">Have a sweet trip with Vibe Coding</p>
+            <p class="text-[9px] text-slate-300 font-bold uppercase tracking-[0.4em] mb-4">Vibe Trip Okinawa 2026</p>
+            <div class="w-12 h-1 bg-rose-500 mx-auto rounded-full"></div>
         </footer>
     </div>
 
     <script>
-        // Scroll interaction or subtle animations can go here
-        window.onload = () => {
-            console.log("Okinawa Vibe App Ready!");
-        };
+        // 收合切換邏輯
+        function toggleDay(id) {
+            const content = document.getElementById(id);
+            const chevron = document.getElementById('chevron-' + id);
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                chevron.classList.remove('active-chevron');
+            } else {
+                content.style.display = 'block';
+                chevron.classList.add('active-chevron');
+            }
+        }
+
+        // 滑動進入動畫
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.05 });
+
+        document.querySelectorAll('.vibe-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
     </script>
 </body>
 </html>
